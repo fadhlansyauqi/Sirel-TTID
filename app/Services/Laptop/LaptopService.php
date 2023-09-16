@@ -37,13 +37,36 @@ class LaptopService extends AppService implements AppServiceInterface
     }
 
 
+    public function edit($id, $data)
+    {
+        $laptop = LaptopTable::findOrFail($id);
+
+        if ($laptop) {
+            $laptop->update([
+                'code' => $data['code'],
+                'name' => $data['name'],
+                'category' => $data['category'],
+                'status' => $data['status'],
+            ]);
+        }
+
+        return $laptop;
+    }
+
     public function update($id, $data)
     {
-        $row = LaptopTable::findOrFail($id);
-        $row->update([
-            'name' => $data['name'],
-        ]);
-        return $row;
+        $laptop = LaptopTable::findOrFail($id);
+
+        if ($laptop) {
+            $laptop->update([
+                'code' => $data['code'],
+                'name' => $data['name'],
+                'category' => $data['category'],
+                'status' => $data['status'],
+            ]);
+        }
+
+        return $laptop;
     }
 
     public function delete($id)

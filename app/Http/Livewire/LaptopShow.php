@@ -47,9 +47,9 @@ class LaptopShow extends Component
     
     }
 
-    public function edit($laptopId)
+    public function edit($laptopId, LaptopService $laptopService)
     {
-        $laptop = Laptop::find($laptopId);
+        $laptop = $laptopService->getById($laptopId);
 
         if ($laptop) {
             $this->code = $laptop->code;
@@ -57,17 +57,11 @@ class LaptopShow extends Component
             $this->category = $laptop->category;
             $this->status = $laptop->status;
             $this->laptopIdToEdit = $laptopId;
-            $this->editMode = true; // Aktifkan mode edit
+            $this->editMode = true;
         }
     }
 
-    public function cancelEdit()
-    {
-        $this->resetInput();
-        $this->editMode = false; // Matikan mode edit
-    }
-
-    public function update()
+    public function update(LaptopService $laptopService)
     {
         $validatedData = $this->validate([
             'code' => 'required',
@@ -76,16 +70,21 @@ class LaptopShow extends Component
             'status' => 'required',
         ]);
 
-        $laptop = Laptop::find($this->laptopIdToEdit);
+        $laptop = $laptopService->update($this->laptopIdToEdit, $validatedData);
 
         if ($laptop) {
-            $laptop->update($validatedData);
             $this->resetInput();
-            $this->editMode = false; // Matikan mode edit setelah update
-            $this->alert('success', 'Laptop updated succesfully');
+            $this->editMode = false;
+            $this->alert('success', 'Laptop updated successfully');
+        } else {
+            $this->alert('error', 'Unable to update laptop');
         }
+    }
 
-        
+    public function cancelEdit()
+    {
+        $this->resetInput();
+        $this->editMode = false; // Matikan mode edit
     }
 
     public function resetInput()
