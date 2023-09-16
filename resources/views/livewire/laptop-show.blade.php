@@ -7,7 +7,9 @@
 				<div class="card-title">
 					<h3 class="card-label ">Laptop List
 					<span class="d-block text-muted pt-2 font-size-sm">Sistem Informasi Rental Laptop</span></h3>
+					
 				</div>
+				<input type="search" wire:model="search" class="form-control float-end mx-2" placeholder="Search..." style="width: 230px"  />
 			</div>
 			<div class="card-body ">
 				<!--begin: Datatable-->
@@ -23,9 +25,12 @@
 						</tr>
 					</thead>
 					<tbody>
+						@php
+							$num = ($laptops->currentPage()-1) * $laptops->perPage()+1; 
+						@endphp
 						@foreach($laptops as $laptop)
 							<tr>
-								<td>{{ $loop->iteration }}</td>
+								<td>{{ $num++ }}</td>
                                 <td>{{ $laptop->code }}</td>
                                 <td>{{ $laptop->name }}</td>
                                 <td>
@@ -99,6 +104,9 @@
 					</tbody>
 				</table>
 				<!--end: Datatable-->
+				<div>
+					{{ $laptops->links() }}
+				</div>
 			</div>
 		</div>
 		<!--end::Card-->
