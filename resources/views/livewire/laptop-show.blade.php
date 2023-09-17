@@ -182,10 +182,15 @@
                     {{-- <button type="reset" class="btn btn-primary mr-2" wire:click="store">Submit</button>
                     <button type="reset" class="btn btn-secondary">Cancel</button> --}}
 
-					<button type="reset" class="btn btn-{{ $editMode ? 'warning' : 'primary' }} mr-2" wire:click="{{ $editMode ? 'update' : 'store' }}">
+					<button type="reset" class="btn btn-{{ $editMode ? 'light-primary' : 'primary' }} mr-2" wire:click="{{ $editMode ? 'update' : 'store' }}" wire:loading.attr="disabled">
 						{{ $editMode ? 'Update' : 'Submit' }}
+						<div wire:loading>
+                            <div class="spinner-border spinner-border-sm" role="status">
+                               
+                              </div>
+                        </div>
 					</button>
-					<button type="reset" class="btn btn-secondary" wire:click="cancelEdit">Cancel</button>
+					<button type="reset" class="btn btn-light" wire:click="cancelEdit">Cancel</button>
                 </div>
             </form>
         </div>

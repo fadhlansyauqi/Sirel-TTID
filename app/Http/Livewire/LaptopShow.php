@@ -35,12 +35,12 @@ class LaptopShow extends Component
                     ->orWhere('status', 'like', '%' . $this->search . '%');
             })
             ->orderBy('id', 'ASC')
-            ->paginate(3);
+            ->paginate(5);
 
             $laptops->appends(['search' => $this->search]); 
         } else {
             $laptops = $laptopServices->getAll();
-            $laptops = Laptop::paginate(3);
+            $laptops = Laptop::paginate(5);
         }
 
         return view('livewire.laptop-show', compact('laptops'))
