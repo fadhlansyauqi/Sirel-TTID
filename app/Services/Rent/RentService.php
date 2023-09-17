@@ -3,6 +3,7 @@
 namespace App\Services\Rent;
 
 use App\Models\Table\RentTable;
+use App\Models\Entity\Rent;
 use App\Services\AppService;
 use App\Services\AppServiceInterface;
 
@@ -25,25 +26,51 @@ class RentService extends AppService implements AppServiceInterface
         return RentTable::findOrFail($id);
     }
 
+    public function getAll()
+    {
+        return Rent::all();
+    }
+
     public function create($data)
     {
-        return RentTable::create([
-            'name' => $data['name'],
-        ]);
+        return Rent::create($data);
+    }
+
+    public function edit($id, $data)
+    {
+        $rent = RentTable::findOrFail($id);
+
+        if ($rent) {
+            $rent->update([
+                'customerName' => $data['customerName'],
+                'laptopName' => $data['laptopName'],
+                'rentDate' => $data['rentDate'],
+                'returnDate' => $data['returnDate'],
+            ]);
+        }
+
+        return $rent;
     }
 
     public function update($id, $data)
     {
-        $row = RentTable::findOrFail($id);
-        $row->update([
-            'name' => $data['name'],
-        ]);
-        return $row;
+        $rent = RentTable::findOrFail($id);
+
+        if ($rent) {
+            $rent->update([
+                'customerName' => $data['customerName'],
+                'laptopName' => $data['laptopName'],
+                'rentDate' => $data['rentDate'],
+                'returnDate' => $data['returnDate'],
+            ]);
+        }
+
+        return $rent;
     }
 
     public function delete($id)
     {
-        $row = RentTable::findOrFail($id);
+        $row = Rent::findOrFail($id);
         $row->delete();
         return $row;
     }
