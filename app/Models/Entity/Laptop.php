@@ -46,4 +46,19 @@ class Laptop extends AppModel
     protected $dates = [
         //
     ];
+
+    public function getCategoryColorAttribute() {
+        if ($this->category == "Standar") {
+           return "#CECE5A";
+        } 
+        elseif ($this->category == "Gaming") {
+            return "#F24C3D";
+        }
+        elseif ($this->category == "Ultrabook") {
+            return "#FD8D14";
+        } 
+        else {
+            return "#FFE17B";
+        }
+    }
 }

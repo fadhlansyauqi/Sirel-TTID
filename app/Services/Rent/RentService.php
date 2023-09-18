@@ -28,12 +28,12 @@ class RentService extends AppService implements AppServiceInterface
 
     public function getAll()
     {
-        return Rent::all();
+        return RentTable::all();
     }
 
     public function create($data)
     {
-        return Rent::create($data);
+        return RentTable::create($data);
     }
 
     public function edit($id, $data)
@@ -43,9 +43,9 @@ class RentService extends AppService implements AppServiceInterface
         if ($rent) {
             $rent->update([
                 'customerName' => $data['customerName'],
-                'laptopName' => $data['laptopName'],
-                'rentDate' => $data['rentDate'],
-                'returnDate' => $data['returnDate'],
+                'laptopName'   => $data['laptopName'],
+                'rentDate'     => $data['rentDate'],
+                'returnDate'   => $data['returnDate'],
             ]);
         }
 
@@ -59,9 +59,9 @@ class RentService extends AppService implements AppServiceInterface
         if ($rent) {
             $rent->update([
                 'customerName' => $data['customerName'],
-                'laptopName' => $data['laptopName'],
-                'rentDate' => $data['rentDate'],
-                'returnDate' => $data['returnDate'],
+                'laptopName'   => $data['laptopName'],
+                'rentDate'     => $data['rentDate'],
+                'returnDate'   => $data['returnDate'],
             ]);
         }
 
@@ -70,7 +70,7 @@ class RentService extends AppService implements AppServiceInterface
 
     public function delete($id)
     {
-        $row = Rent::findOrFail($id);
+        $row = RentTable::findOrFail($id);
         $row->delete();
         return $row;
     }

@@ -69,8 +69,8 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!--begin::Content-->
 				<div class="content order-1 order-lg-2 d-flex flex-column w-100 pb-0" style="background-color: #B1DCED;">
 					<!--begin::Title-->
-					<div class="d-flex flex-column justify-content-center text-center pt-lg-40 pt-md-5 pt-sm-5 px-lg-0 pt-5 px-5">
-						<h3 class="display4 font-weight-bolder my-7 text-dark" style="color: #986923;">S I R E L</h3>
+					<div class="d-flex flex-column justify-content-center text-center px-lg-0 px-5">
+						<h3 class="display4 font-weight-bolder text-dark" style="color: #986923;">S I R E L</h3>
 						<p class="font-weight-bolder font-size-h2-md font-size-lg text-dark opacity-70">S i s t e m &ensp; I n f o r m a s i &ensp; R e n t a l &ensp; L a p t o p</p>
 					</div>
 					<!--end::Title-->

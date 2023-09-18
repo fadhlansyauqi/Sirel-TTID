@@ -11,9 +11,9 @@ class Renter extends Component
     use LivewireAlert;
     public $name, $email, $phone, $address;
     protected $rules = [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'phone' => 'required',
+            'name'    => 'required|string',
+            'email'   => 'required|email',
+            'phone'   => 'required',
             'address' => 'required',
     ];
 
@@ -26,9 +26,9 @@ class Renter extends Component
     public function store(RenterService $renterService) {
         $this->validate();
         $data = [
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
+            'name'    => $this->name,
+            'email'   => $this->email,
+            'phone'   => $this->phone,
             'address' => $this->address,
         ];
         $renterService->create($data);
@@ -38,9 +38,9 @@ class Renter extends Component
 
     public function resetInput()
     {
-        $this->name = '';
-        $this->email = '';
-        $this->phone = '';
+        $this->name    = '';
+        $this->email   = '';
+        $this->phone   = '';
         $this->address = '';
     }
 }

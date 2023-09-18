@@ -16,7 +16,7 @@
         <!--begin::Form group-->
         <div class="form-group">
             <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" type="email" name="email"  />
+            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="email" type="email" name="email"  />
             @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -29,7 +29,7 @@
             <div class="d-flex justify-content-between mt-n5">
                 <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
             </div>
-            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg  @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  id="password" type="password" />
+            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg  @error('password') is-invalid @enderror" name="password"  id="password" type="password" />
         </div>
         <!--end::Form group-->
         <!--begin::Action-->

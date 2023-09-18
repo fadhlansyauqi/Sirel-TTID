@@ -35,15 +35,7 @@
                                 <td>{{ $laptop->name }}</td>
                                 <td>
 									<span class="label font-weight-bold label-lg label-light-info label-inline" style="
-										@if($laptop->category === 'Standar')
-											color: white; background-color: #CECE5A;
-										@elseif($laptop->category === 'Ultrabook')
-											color: white; background-color: #FD8D14;
-										@elseif($laptop->category === 'Gaming')
-											color: white; background-color: #F24C3D;
-										@elseif($laptop->category === 'Mac')
-											color: white; background-color: #FFE17B;
-										@endif">
+											color: white; background-color: {{ $laptop -> category_color }};">
 										{{ $laptop->category }}
 									</span>
 								</td>
@@ -142,7 +134,7 @@
                         @enderror
                     </div>
 
-                    <<div class="form-group">
+                    <div class="form-group">
 						<label >Laptop Category
 							<span class="text-danger">*</span>
 						</label>

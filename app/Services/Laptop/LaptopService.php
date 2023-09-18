@@ -28,12 +28,12 @@ class LaptopService extends AppService implements AppServiceInterface
 
     public function getAll()
     {
-        return Laptop::all();
+        return LaptopTable::all();
     }
 
     public function create($data)
     {
-        return Laptop::create($data);
+        return LaptopTable::create($data);
     }
 
 
@@ -43,10 +43,10 @@ class LaptopService extends AppService implements AppServiceInterface
 
         if ($laptop) {
             $laptop->update([
-                'code' => $data['code'],
-                'name' => $data['name'],
+                'code'     => $data['code'],
+                'name'     => $data['name'],
                 'category' => $data['category'],
-                'status' => $data['status'],
+                'status'   => $data['status'],
             ]);
         }
 
@@ -59,10 +59,10 @@ class LaptopService extends AppService implements AppServiceInterface
 
         if ($laptop) {
             $laptop->update([
-                'code' => $data['code'],
-                'name' => $data['name'],
+                'code'     => $data['code'],
+                'name'     => $data['name'],
                 'category' => $data['category'],
-                'status' => $data['status'],
+                'status'   => $data['status'],
             ]);
         }
 
@@ -71,7 +71,7 @@ class LaptopService extends AppService implements AppServiceInterface
 
     public function delete($id)
     {
-        $row = Laptop::findOrFail($id);
+        $row = LaptopTable::findOrFail($id);
         $row->delete();
         return $row;
     }

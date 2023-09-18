@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\WithPagination;
 use Livewire\Component;
-use App\Services\Laptop\LaptopService;
+use Illuminate\Http\Request;
+use Livewire\WithPagination;
 use App\Models\Entity\Laptop;
 use Illuminate\Pagination\Paginator;
+use App\Services\Laptop\LaptopService;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class LaptopShow extends Component
 {
@@ -17,31 +18,24 @@ class LaptopShow extends Component
     protected $paginationTheme = 'bootstrap';
     public $code, $name, $category, $status;
     public $editMode = false;
-    public $search = '';
+    public $search   = '';
     protected $rules = [
-            'code' => 'required|string|unique:laptops',
-            'name' => 'required|string',
+            'code'     => 'required|string|unique:laptops',
+            'name'     => 'required|string',
             'category' => 'required|string',
-            'status' => 'required|string',
+            'status'   => 'required|string',
     ];
 
     public function render(LaptopService $laptopServices)
     {
-        if ($this->search) {
-            $laptops = Laptop::where(function ($query) {
-                $query->where('code', 'like', '%' . $this->search . '%')
-                    ->orWhere('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('category', 'like', '%' . $this->search . '%')
-                    ->orWhere('status', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy('id', 'ASC')
-            ->paginate(5);
 
-            $laptops->appends(['search' => $this->search]); 
-        } else {
-            $laptops = $laptopServices->getAll();
-            $laptops = Laptop::paginate(5);
-        }
+        $laptops = $laptopServices->dataTable(new Request([
+            
+            'entries'        => 5,
+            'sort_type'      => 'desc',
+            'search_key'     => $this->search,
+            'search_columns' => 'code,name,category,status',
+        ]));
 
         return view('livewire.laptop-show', compact('laptops'))
             ->extends('layouts.index')
@@ -53,10 +47,10 @@ class LaptopShow extends Component
     public function store(LaptopService $laptopService) {
         $this->validate();
         $data = [
-            'code' => $this->code,
-            'name' => $this->name,
+            'code'     => $this->code,
+            'name'     => $this->name,
             'category' => $this->category,
-            'status' => $this->status,
+            'status'   => $this->status,
         ];
         $laptopService->create($data);
         $this->alert('success', 'Laptop added succesfully');
@@ -89,10 +83,10 @@ class LaptopShow extends Component
     public function update(LaptopService $laptopService)
     {
         $validatedData = $this->validate([
-            'code' => 'required',
-            'name' => 'required',
+            'code'     => 'required',
+            'name'     => 'required',
             'category' => 'required',
-            'status' => 'required',
+            'status'   => 'required',
         ]);
 
         $laptop = $laptopService->update($this->laptopIdToEdit, $validatedData);
@@ -114,10 +108,10 @@ class LaptopShow extends Component
 
     public function resetInput()
     {
-        $this->code = '';
-        $this->name = '';
+        $this->code     = '';
+        $this->name     = '';
         $this->category = '';
-        $this->status = '';
+        $this->status   = '';
     }
 
 }
